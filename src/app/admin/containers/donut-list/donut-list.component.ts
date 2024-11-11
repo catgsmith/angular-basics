@@ -1,26 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Donut } from '../../models/donut.model';
+import { DonutCardComponent } from '../../components/donut-card/donut-card.component';
 
 @Component({
   selector: 'donut-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DonutCardComponent],
   template: `
     <div>
-      <div>
-        {{ donut.name }}
-        {{ donut.price }}
-      </div>
+      <donut-card [donut]="donuts[0]"></donut-card>
+      <donut-card [donut]="donuts[1]"></donut-card>
+      <donut-card [donut]="donuts[2]"></donut-card>
     </div>
   `,
   styles: [],
 })
 export class DonutListComponent implements OnInit {
-  donut!: Donut;
   donuts!: Donut[];
-
-  constructor() {}
 
   ngOnInit(): void {
     this.donuts = [
@@ -46,7 +43,5 @@ export class DonutListComponent implements OnInit {
         description: 'Chocolate drizzled with caramel.',
       },
     ];
-
-    this.donut = this.donuts[0];
   }
 }
