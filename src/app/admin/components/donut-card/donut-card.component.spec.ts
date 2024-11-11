@@ -12,6 +12,7 @@ describe('DonutCardComponent', () => {
     name: 'Chocolate Donut',
     icon: 'chocolate',
     price: 250,
+    promo: true,
     description: 'A delicious chocolate donut'
   };
 
