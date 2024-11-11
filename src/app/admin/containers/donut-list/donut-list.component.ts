@@ -1,11 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'donut-list',
   standalone: true,
   imports: [CommonModule],
-  template: `<p>donut-list works!</p>`,
-  styles: ``,
+  template: `
+    <div>
+      <div>
+        {{ donut.name }}
+        {{ donut.price }}
+      </div>
+    </div>
+  `,
+  styles: [],
 })
-export class DonutListComponent {}
+export class DonutListComponent implements OnInit {
+  donut!: any;
+  donuts!: any[];
+
+  ngOnInit(): void {
+    this.donuts = [
+      {
+        id: 'y8z0As',
+        name: 'Just Chocolate',
+        icon: 'just-chocolate',
+        price: 119,
+        description: 'For the pure chocoholic.',
+      },
+      {
+        id: '3u98Kl',
+        name: 'Glazed Fudge',
+        icon: 'glazed-fudge',
+        price: 129,
+        description: 'Sticky perfection.',
+      },
+      {
+        id: 'ae098s',
+        name: 'Caramel Swirl',
+        icon: 'caramel-swirl',
+        price: 129,
+        description: 'Chocolate drizzled with caramel.',
+      },
+    ];
+
+    this.donut = this.donuts[0];
+  }
+}
