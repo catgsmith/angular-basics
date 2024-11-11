@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Donut } from '../../models/donut.model';
 
 @Component({
   selector: 'donut-list',
@@ -16,8 +17,10 @@ import { CommonModule } from '@angular/common';
   styles: [],
 })
 export class DonutListComponent implements OnInit {
-  donut!: any;
-  donuts!: any[];
+  donut!: Donut;
+  donuts!: Donut[];
+
+  constructor() {}
 
   ngOnInit(): void {
     this.donuts = [
