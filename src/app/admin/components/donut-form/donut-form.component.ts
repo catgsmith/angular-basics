@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'donut-form',
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <form class="donut-form" #form="ngForm">
+    <form class="donut-form" (ngSubmit)="handleSubmit(form)" #form="ngForm">
       <label>
         <span>Name</span>
         <input type="text" name="name" class="input" required minlength="5" ngModel #name="ngModel"/>
@@ -66,6 +66,8 @@ import { FormsModule } from '@angular/forms';
         ></textarea>
       </label>
 
+      <button type="submit" class="btn btn--green" [disabled]="form.invalid">Create</button>
+
       <pre>{{ form.value | json }}</pre>
     </form>
   `,
@@ -104,5 +106,10 @@ export class DonutFormComponent {
     'vanilla-sundae',
     'zesty-lemon',
   ];
-
+  
+  handleSubmit(form: NgForm) {
+    if (form.valid) {
+      console.log(form.value);
+    }
+  }
 }
