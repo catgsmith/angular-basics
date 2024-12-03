@@ -72,7 +72,11 @@ import { FormsModule, NgForm } from '@angular/forms';
       </label>
 
       <button type="submit" class="btn btn--green">Create</button>
-
+      <button type="button" class="btn btn--grey" (click)="form.resetForm({ name: 'Initial state'})">Reset Form</button>
+        
+      @if (form.valid && form.submitted) {
+        <div class="donut-form-working">Working...</div>
+      }
       <pre>{{ form.value | json }}</pre>
     </form>
   `,
@@ -93,6 +97,11 @@ import { FormsModule, NgForm } from '@angular/forms';
               margin-bottom: 0;
             }
           }
+        }
+        &-working {
+          font-size: 12px;
+          font-style: italic;
+          margin: 10px 0;
         }
         &-error {
           font-size: 12px;
