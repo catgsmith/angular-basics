@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
         <span>Name</span>
         <input type="text" name="name" class="input" ngModel />
       </label>
-      
+
       <label>
         <span>Icon</span>
         <select name="icon" class="input input--select" ngModel>
@@ -42,7 +42,14 @@ import { FormsModule } from '@angular/forms';
         <span>Limited</span>
       </label>
     </div>
-
+    <label>
+        <span>Description</span>
+        <textarea
+          name="description"
+          class="input input--textarea"
+          ngModel
+        ></textarea>
+      </label>
 
       <pre>{{ form.value | json }}</pre>
     </form>
