@@ -10,7 +10,8 @@ import { FormsModule, NgForm } from '@angular/forms';
     <form class="donut-form" (ngSubmit)="handleSubmit(form)" #form="ngForm">
       <label>
         <span>Name</span>
-        <input type="text" name="name" class="input" required minlength="5" ngModel #name="ngModel"/>
+        <input type="text" name="name" class="input" required minlength="5" ngModel 
+        [ngModelOptions]="{ updateOn: 'blur' }" #name="ngModel"/>
         @if (name.invalid && name.touched) {
           @if (name.errors?.['minlength']) {
           <div class="donut-form-error" >Minimum length of a name is 5!</div>
