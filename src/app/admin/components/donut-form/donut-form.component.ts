@@ -12,6 +12,16 @@ import { FormsModule } from '@angular/forms';
         <span>Name</span>
         <input type="text" name="name" class="input" ngModel />
       </label>
+      
+      <label>
+        <span>Icon</span>
+        <select name="icon" class="input input--select" ngModel>
+          <option *ngFor="let icon of icons" [ngValue]="icon">
+            {{ icon }}
+          </option>
+        </select>
+      </label>
+
       <label>
         <span>Price</span>
         <input type="number" name="price" class="input" ngModel />
@@ -58,4 +68,15 @@ import { FormsModule } from '@angular/forms';
     }
   `,
 })
-export class DonutFormComponent { }
+export class DonutFormComponent {
+  icons: string[] = [
+    'caramel-swirl',
+    'glazed-fudge',
+    'just-chocolate',
+    'sour-supreme',
+    'strawberry-glaze',
+    'vanilla-sundae',
+    'zesty-lemon',
+  ];
+
+}
