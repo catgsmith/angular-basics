@@ -10,13 +10,14 @@ import { FormsModule } from '@angular/forms';
     <form class="donut-form" #form="ngForm">
       <label>
         <span>Name</span>
-        <input type="text" name="name" class="input" required ngModel #name="ngModel"/>
-        <p>{{ name.valid }}</p>
-        <p>{{ name.invalid }}</p>
-        <p>{{ name.touched }}</p>
-        <p>{{ name.untouched }}</p>
-        <p>{{ name.pristine }}</p>
-        <p>{{ name.dirty }}</p>
+        <input type="text" name="name" class="input" required minlength="5" ngModel #name="ngModel"/>
+        @if (name.invalid && name.dirty) {
+          @if (name.errors?.['minlength']) {
+            <div class="donut-form-error" >Minimum length of a name is 5!</div>
+          } @else if (name.errors?.['required']) {
+            <div class="donut-form-error">Name is required.</div>
+          }
+        }
       </label>
 
       <label>
@@ -85,6 +86,10 @@ import { FormsModule } from '@angular/forms';
             margin-bottom: 0;
           }
         }
+      }
+      &-error {
+        font-size: 12px;
+        color: #e66262;
       }
     }
   `,

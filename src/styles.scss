@@ -80,3 +80,7 @@ label {
   }
 }
 
+form .ng-invalid.ng-touched {
+  background: #ffe7e7;
+  border-color: #e66262;
+}
