@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DonutSingleComponent } from './admin/containers/donut-single/donut-single.component';
-//import { DonutListComponent } from './admin/containers/donut-list/donut-list.component';
+import { DonutListComponent } from "./admin/containers/donut-list/donut-list.component";
 
 @Component({
   standalone: true,

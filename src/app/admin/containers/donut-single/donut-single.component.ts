@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DonutFormComponent } from "../../components/donut-form/donut-form.component";
 import { Donut } from '../../models/donut.model';
+import { DonutService } from '../../services/donut.service';
 
 @Component({
   selector: 'donut-single',
@@ -17,14 +18,13 @@ import { Donut } from '../../models/donut.model';
 export class DonutSingleComponent implements OnInit {
   donut!: Donut;
 
+  constructor(private donutService: DonutService) {}
+
   ngOnInit(): void {
-    this.donut = {
-      id: 'y8z0As',
-      name: 'Just Chocolate',
-      icon: 'just-chocolate',
-      price: 119,
-      description: 'For the pure chocoholic.',
-    };
+    const id = 'zzz'; // Does not exist 'ae098s';
+    this.donut = this.donutService.donuts.find(
+      (donut: Donut) => donut.id === id
+    ) || { name: '', icon: '', price: 0, description: '' };
   }
 
   onCreate(donut: Donut) {

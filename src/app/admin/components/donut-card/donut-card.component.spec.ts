@@ -50,8 +50,7 @@ describe('DonutCardComponent', () => {
 
   test.each([
     ['new', 'NEW'],
-    ['limited', 'LIMITED'],
-    [undefined, 'Nothing special...']
+    ['limited', 'LIMITED']
   ])('should render %s when donut promo is %s', (promo:  any, expectedLabel : any) => {
     component.donut!.promo =  promo;
     fixture.detectChanges();

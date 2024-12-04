@@ -16,13 +16,14 @@ import { Donut } from '../../models/donut.model';
       <div>
         <p class="donut-card-name">
           {{ donut.name }}
-          <span class="donut-card-label">
-          @switch(donut.promo) {
-            @case('new') { NEW  }
-            @case('limited') { LIMITED  }
-            @default { Nothing special... }
+          @if (donut.promo) {
+            <span class="donut-card-label">
+              @switch(donut.promo) {
+                @case('new') { NEW  }
+                @case('limited') { LIMITED  }
+              }
+            </span>
           }
-          </span>
         </p>
         <p class="donut-card-price">
           {{ donut.price / 100 | currency: 'USD':'symbol' }}
