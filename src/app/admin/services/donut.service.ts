@@ -72,4 +72,8 @@ export class DonutService {
     console.log(this.donuts); // For debugging
   }
 
+  delete(payload: Donut): void {
+    this.donuts = this.donuts.filter((donut: Donut) => donut.id !== payload.id);
+    console.log(this.donuts); // For debugging
+  }
 }

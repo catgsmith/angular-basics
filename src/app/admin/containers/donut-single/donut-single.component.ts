@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DonutFormComponent } from "../../components/donut-form/donut-form.component";
+import { DonutFormComponent } from '../../components/donut-form/donut-form.component';
 import { Donut } from '../../models/donut.model';
 import { DonutService } from '../../services/donut.service';
 
@@ -10,7 +10,12 @@ import { DonutService } from '../../services/donut.service';
   imports: [CommonModule, DonutFormComponent],
   template: `
     <div>
-      <donut-form [donut]="donut" (create)="onCreate($event)" (update)="onUpdate($event)"></donut-form>
+      <donut-form
+        [donut]="donut"
+        (create)="onCreate($event)"
+        (update)="onUpdate($event)"
+        (delete)="onDelete($event)"
+      ></donut-form>
     </div>
   `,
   styles: ``,
@@ -33,4 +38,10 @@ export class DonutSingleComponent implements OnInit {
     this.donutService.update(donut);
     this.donut = donut;
   }
+
+  onDelete(donut: Donut) {
+    console.log('onDelete', donut);
+    this.donutService.delete(donut);
+  }
+
 }
