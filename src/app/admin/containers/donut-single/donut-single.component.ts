@@ -26,5 +26,6 @@ export class DonutSingleComponent implements OnInit {
 
   onCreate(donut: Donut) {
     console.log('onCreate', donut);
+    this.donutService.create(donut);
   }
 }

@@ -78,8 +78,6 @@ import { Donut } from '../../models/donut.model';
       @if (form.valid && form.submitted) {
         <div class="donut-form-working">Working...</div>
       }
-      <pre>{{ donut | json }}</pre>
-      <pre>{{ form.value | json }}</pre>
     </form>
   `,
   styles: [
