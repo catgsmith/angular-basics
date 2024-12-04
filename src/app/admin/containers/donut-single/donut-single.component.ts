@@ -10,7 +10,7 @@ import { DonutService } from '../../services/donut.service';
   imports: [CommonModule, DonutFormComponent],
   template: `
     <div>
-      <donut-form [donut]="donut" (create)="onCreate($event)"></donut-form>
+      <donut-form [donut]="donut" (create)="onCreate($event)" (update)="onUpdate($event)"></donut-form>
     </div>
   `,
   styles: ``,
@@ -27,5 +27,10 @@ export class DonutSingleComponent implements OnInit {
   onCreate(donut: Donut) {
     console.log('onCreate', donut);
     this.donutService.create(donut);
+  }
+  onUpdate(donut: Donut) {
+    console.log('onUpdate', donut);
+    this.donutService.update(donut);
+    this.donut = donut;
   }
 }

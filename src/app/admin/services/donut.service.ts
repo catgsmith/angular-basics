@@ -64,4 +64,12 @@ export class DonutService {
     this.donuts = [ ...this.donuts, payload ];
     console.log(this.donuts); // For debugging
   }
+
+  update(payload: Donut): void {
+    this.donuts = this.donuts.map((donut: Donut) => {
+      return donut.id === payload.id ? { ...donut, ...payload } : donut;
+    });
+    console.log(this.donuts); // For debugging
+  }
+
 }

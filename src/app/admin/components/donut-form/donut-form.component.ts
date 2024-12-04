@@ -8,7 +8,7 @@ import { Donut } from '../../models/donut.model';
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <form class="donut-form" (ngSubmit)="handleSubmit(form)" #form="ngForm">
+    <form class="donut-form" #form="ngForm">
       <label>
         <span>Name</span>
         <input type="text" name="name" class="input" required minlength="5" [ngModel]="donut.name" 
@@ -65,14 +65,13 @@ import { Donut } from '../../models/donut.model';
       <label>
         <span>Description</span>
         <textarea name="description" class="input input--textarea" required [ngModel]="donut.description" #description="ngModel"></textarea>
-        @if (description.invalid && description.touched) {
-          @if (description.errors?.['required']) {
-            <div class="donut-form-error">Description is required.</div>
-          }
+        @if (description.invalid && description.touched && description.errors?.['required']) {
+          <div class="donut-form-error">Description is required.</div>
         }
       </label>
 
-      <button type="submit" class="btn btn--green">Create</button>
+      <button type="button" class="btn btn--green" (click)="handleCreate(form)">Create</button>
+      <button type="button" class="btn btn--green" [disabled]="form.untouched && form.pristine" (click)="handleUpdate(form)">Update</button>
       <button type="button" class="btn btn--grey" (click)="form.resetForm({ name: 'Initial state'})">Reset Form</button>
         
       @if (form.valid && form.submitted) {
@@ -108,12 +107,16 @@ import { Donut } from '../../models/donut.model';
           color: #e66262;
         }
       }
+      .btn--green:disabled {
+        background-color: #ccc;
+      }
     `,
   ],
 })
 export class DonutFormComponent {
   @Input() donut!: Donut;
   @Output() create = new EventEmitter<Donut>();
+  @Output() update = new EventEmitter<Donut>();
 
   icons: string[] = [
     'caramel-swirl',
@@ -125,11 +128,20 @@ export class DonutFormComponent {
     'zesty-lemon',
   ];
 
-  handleSubmit(form: NgForm) {
+  handleCreate(form: NgForm) {
     if (form.valid) {
       this.create.emit(form.value);
     } else {
       form.form.markAllAsTouched();
     }
   }
+
+  handleUpdate(form: NgForm) {
+    if (form.valid) {
+      this.update.emit({...form.value, id: this.donut.id});
+    } else {
+      form.form.markAllAsTouched();
+    }   
+  }
+
 }
