@@ -1,39 +1,41 @@
 import { Injectable } from '@angular/core';
 import { Donut } from '../models/donut.model';
 import { HttpClient } from '@angular/common/http';
+import { EMPTY, of, tap } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DonutService {
-  //baseUrl = "http://localhost:3000";
+  private donuts: Donut[] = [];
 
-
-  private donuts: Donut[] = [  ];
-
-  constructor(private http: HttpClient) {
-    // This service can now make HTTP requests via `this.http`.
-  }
+  constructor(private http: HttpClient) {}
 
   read() {
-    return this.http.get<Donut[]>(`/api/donuts`);
-    //return this.http.get<Donut[]>(this.baseUrl + '/donuts');
-    //return this.donuts;
-  }
-
- /*  readOne(id: string) {
-    const donut = this.read().find((donut: Donut) => donut.id === id);
-
-    if (donut) {
-      return donut;
+    if (this.donuts.length) {
+      return of(this.donuts);
     }
 
-    return { name: '', icon: '', price: 0, description: '' };
-  } */
+    return this.http.get<Donut[]>(`/api/donuts`).pipe(
+      tap((donuts) => {
+        this.donuts = donuts;
+      })
+    );
+  }
 
-  create(payload: Donut): void {
-    this.donuts = [ ...this.donuts, payload ];
-    console.log(this.donuts); // For debugging
+  // readOne(id: string) {
+  //   const donut = this.read().find((donut: Donut) => donut.id === id);
+
+  //   if (donut) {
+  //     return donut;
+  //   }
+
+  //   return { name: '', icon: '', price: 0, description: '' };
+  // }
+
+  create(payload: Donut) {
+    this.donuts = [...this.donuts, payload];
+    console.log(this.donuts);
   }
 
   update(payload: Donut): void {
