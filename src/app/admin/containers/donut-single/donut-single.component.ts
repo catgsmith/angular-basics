@@ -27,13 +27,12 @@ export class DonutSingleComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('DonutSingleComponent');
-    this.donutService.readOne('8amkZ9')
+    this.donutService.readOne('zzz') // Hardcoded id for now - SHOWS EMPTY FORM
     .subscribe((donut: Donut) => this.donut = donut);
   }
 
   onCreate(donut: Donut) {
-    console.log('onCreate', donut);
-    this.donutService.create(donut);
+    this.donutService.create(donut).subscribe(() => console.log('onCreate', donut));
   }
   onUpdate(donut: Donut) {
     console.log('onUpdate', donut);
