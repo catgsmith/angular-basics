@@ -26,6 +26,13 @@ To see all available targets to run for a project, run:
 npx nx show project angular-basics
 ```
 
+To run the JSON server with the db.json file, run:
+
+```sh
+npx json-server --watch db.json --port 3000
+```
+This will start the server on http://localhost:3000.
+
 These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
 
 [More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
