@@ -1,18 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Donut } from '../models/donut.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DonutService {
+  //baseUrl = "http://localhost:3000";
+
+
   private donuts: Donut[] = [  ];
 
-
-  read() {
-    return this.donuts;
+  constructor(private http: HttpClient) {
+    // This service can now make HTTP requests via `this.http`.
   }
 
-  readOne(id: string) {
+  read() {
+    return this.http.get<Donut[]>(`/api/donuts`);
+    //return this.http.get<Donut[]>(this.baseUrl + '/donuts');
+    //return this.donuts;
+  }
+
+ /*  readOne(id: string) {
     const donut = this.read().find((donut: Donut) => donut.id === id);
 
     if (donut) {
@@ -20,7 +29,7 @@ export class DonutService {
     }
 
     return { name: '', icon: '', price: 0, description: '' };
-  }
+  } */
 
   create(payload: Donut): void {
     this.donuts = [ ...this.donuts, payload ];
