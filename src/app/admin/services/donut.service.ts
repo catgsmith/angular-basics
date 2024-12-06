@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Donut } from '../models/donut.model';
 import { HttpClient } from '@angular/common/http';
-import { map, of, tap } from 'rxjs';
+import { map, Observable, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DonutService {
+
+  baseUrl = "http://localhost:3000";
   private donuts: Donut[] = [];
 
   constructor(private http: HttpClient) { }
 
-  read() {
+  read() : Observable<Donut[]> {
     if (this.donuts.length) {
       return of(this.donuts);
     }
@@ -23,7 +25,7 @@ export class DonutService {
     );
   }
 
-  readOne(id: string) {
+  readOne(id: string) : Observable<Donut> {
     return this.read().pipe(
       map((donuts: Donut[]) => {
         const donut = donuts.find((donut: Donut) => donut.id === id);
@@ -36,7 +38,7 @@ export class DonutService {
     );
   }
 
-  create(payload: Donut) {
+  create(payload: Donut): Observable<Donut> {
     return this.http.post<Donut>(`/api/donuts`, payload).pipe(
       tap((donut) => {
         this.donuts = [...this.donuts, donut];
@@ -44,11 +46,17 @@ export class DonutService {
     );
   }
 
-  update(payload: Donut): void {
-    this.donuts = this.donuts.map((donut: Donut) => {
-      return donut.id === payload.id ? { ...donut, ...payload } : donut;
-    });
-    console.log(this.donuts); // For debugging
+  update(payload: Donut) : Observable<Donut> {
+
+    return this.http.put<Donut>(this.baseUrl + `/donuts/${payload.id}`, payload).pipe(
+    //return this.http.put<Donut>(`/api/donuts/${payload.id}`, payload).pipe(
+      tap((donut) => {
+        this.donuts = this.donuts.map((item: Donut) => {
+          return item.id === donut.id ? donut : item;
+        });
+        console.log(this.donuts); // For debugging
+      })
+    );
   }
 
   delete(payload: Donut): void {
