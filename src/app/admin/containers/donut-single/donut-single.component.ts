@@ -43,8 +43,9 @@ export class DonutSingleComponent implements OnInit {
   }
 
   onDelete(donut: Donut) {
-    console.log('onDelete', donut);
-    this.donutService.delete(donut);
+    this.donutService
+    .delete(donut)
+    .subscribe(() => console.log('Deleted successfully!'));
   }
 
 }

@@ -59,8 +59,13 @@ export class DonutService {
     );
   }
 
-  delete(payload: Donut): void {
-    this.donuts = this.donuts.filter((donut: Donut) => donut.id !== payload.id);
-    console.log(this.donuts); // For debugging
+  delete(payload: Donut): Observable<Donut> {
+    return this.http.delete<Donut>(this.baseUrl + `/donuts/${payload.id}`).pipe(
+    //return this.http.delete<Donut>(`/api/donuts/${payload.id}`).pipe(
+      tap(() => {
+        this.donuts = this.donuts.filter((donut: Donut) => donut.id !== payload.id);
+        console.log(this.donuts); // For debugging
+      })
+    );
   }
 }
