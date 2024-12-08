@@ -9,7 +9,7 @@ export const appRoutes: Routes = [
                 loadComponent: () => import('./admin/containers/donut-list/donut-list.component').then(c => c.DonutListComponent)
             },
             {
-                path: 'donut',
+                path: 'donuts/new',
                 loadComponent: () => import('./admin/containers/donut-single/donut-single.component').then(c => c.DonutSingleComponent)
             },
             { path: '', pathMatch: 'full', redirectTo: 'donuts' },
