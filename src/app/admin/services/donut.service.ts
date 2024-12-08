@@ -47,7 +47,7 @@ export class DonutService {
     );
   }
 
-  readOne(id: string) : Observable<Donut> {
+  readOne(id: string | null) : Observable<Donut> {
     return this.read().pipe(
       map((donuts: Donut[]) => {
         const donut = donuts.find((donut: Donut) => donut.id === id);
