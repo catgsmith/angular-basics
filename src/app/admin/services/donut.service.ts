@@ -3,7 +3,7 @@ import { Donut } from '../models/donut.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, Observable, of, tap } from 'rxjs';
 import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, delay, retry} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +23,14 @@ export class DonutService {
     return this.http.get<Donut[]>(`/api/donuts`).pipe(
       tap((donuts) => {
         this.donuts = donuts;
+      }),
+      //retry(2),
+      retry({
+        count: 2, // Retry up to 2 times
+        delay: (error, retryCount) => {
+          console.log(`Retry attempt ${retryCount}, waiting 2 seconds...`);
+          return of(error).pipe(delay(2000)); // Wait 2 seconds before retry
+        },
       }),
       catchError(this.handleError)
     );
