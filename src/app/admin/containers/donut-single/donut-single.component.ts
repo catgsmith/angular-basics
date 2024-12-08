@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { DonutFormComponent } from '../../components/donut-form/donut-form.component';
 import { Donut } from '../../models/donut.model';
 import { DonutService } from '../../services/donut.service';
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 
 @Component({
   selector: 'donut-single',
   standalone: true,
-  imports: [CommonModule, DonutFormComponent],
+  imports: [CommonModule, DonutFormComponent, ToastrModule],
   template: `
     <div>
       <donut-form
@@ -22,8 +23,7 @@ import { DonutService } from '../../services/donut.service';
 })
 export class DonutSingleComponent implements OnInit {
   donut!: Donut;
-
-  constructor(private donutService: DonutService) {}
+  constructor(private donutService: DonutService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.donutService.readOne('8amkZ9') // Hardcoded id for now - SHOWS EMPTY FORM
@@ -39,7 +39,10 @@ export class DonutSingleComponent implements OnInit {
   onUpdate(donut: Donut) {
     this.donutService
       .update(donut)
-      .subscribe(() => console.log('Updated successfully!'));
+      .subscribe({
+        next: () => this.toastr.success('Donut updated successfully!'),
+        error: (err) => this.toastr.error(`Failed to update the donut: \n${err.message}`),
+      });
   }
 
   onDelete(donut: Donut) {
