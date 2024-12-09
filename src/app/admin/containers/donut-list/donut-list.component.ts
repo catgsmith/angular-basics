@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 //import { CommonModule } from '@angular/common';
 import { Donut } from '../../models/donut.model';
 import { DonutCardComponent } from '../../components/donut-card/donut-card.component';
@@ -33,9 +33,9 @@ import { RouterModule } from '@angular/router';
   ],
 })
 export class DonutListComponent implements OnInit {
-  donuts!: Donut[];
+  private donutService = inject(DonutService);
 
-  constructor(private donutService: DonutService) {}
+  donuts!: Donut[];
 
   ngOnInit(): void {
     this.donutService

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Donut } from '../models/donut.model';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { map, Observable, of, tap } from 'rxjs';
@@ -9,11 +9,11 @@ import { catchError, delay, retry} from 'rxjs/operators';
   providedIn: 'root',
 })
 export class DonutService {
+  private http = inject(HttpClient);
+
 
   baseUrl = "http://localhost:3000";
   private donuts: Donut[] = [];
-
-  constructor(private http: HttpClient) { }
 
   read() : Observable<Donut[]> {
     if (this.donuts.length) {
