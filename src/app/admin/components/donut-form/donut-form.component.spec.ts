@@ -10,7 +10,7 @@ describe('DonutFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormsModule, DonutFormComponent], // Correct usage for standalone component
+      imports: [FormsModule, DonutFormComponent] // Correct usage for standalone component
     }).compileComponents();
 
     fixture = TestBed.createComponent(DonutFormComponent);
@@ -27,7 +27,7 @@ describe('DonutFormComponent', () => {
       icon: 'caramel-swirl',
       price: 2.5,
       description: 'A delicious test donut',
-      promo: 'new',
+      promo: 'new'
     };
     fixture.detectChanges();
 
@@ -63,7 +63,7 @@ describe('DonutFormComponent', () => {
       icon: 'glazed-fudge',
       price: 3.5,
       description: 'A freshly baked glazed donut',
-      promo: 'limited',
+      promo: 'limited'
     });
 
     component.handleSubmit(testForm);
@@ -73,7 +73,7 @@ describe('DonutFormComponent', () => {
       icon: 'glazed-fudge',
       price: 3.5,
       description: 'A freshly baked glazed donut',
-      promo: 'limited',
+      promo: 'limited'
     });
   });
 
@@ -103,7 +103,7 @@ describe('DonutFormComponent', () => {
       icon: 'zesty-lemon',
       price: 2.0,
       description: 'A test donut',
-      promo: 'new',
+      promo: 'new'
     };
     seedForm(initialDonut);
 
@@ -127,4 +127,3 @@ describe('DonutFormComponent', () => {
     descriptionTextarea.dispatchEvent(new Event('input'));
   }
 });
-

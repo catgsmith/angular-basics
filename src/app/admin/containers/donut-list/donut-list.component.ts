@@ -1,5 +1,4 @@
 import { Component, OnInit, inject } from '@angular/core';
-//import { CommonModule } from '@angular/common';
 import { Donut } from '../../models/donut.model';
 import { DonutCardComponent } from '../../components/donut-card/donut-card.component';
 import { DonutService } from '../../services/donut.service';
@@ -29,8 +28,8 @@ import { RouterModule } from '@angular/router';
           margin-bottom: 10px;
         }
       }
-    `,
-  ],
+    `
+  ]
 })
 export class DonutListComponent implements OnInit {
   private donutService = inject(DonutService);
@@ -38,9 +37,7 @@ export class DonutListComponent implements OnInit {
   donuts!: Donut[];
 
   ngOnInit(): void {
-    this.donutService
-      .read()
-      .subscribe((donuts: Donut[]) => (this.donuts = donuts));
+    this.donutService.read().subscribe((donuts: Donut[]) => (this.donuts = donuts));
   }
 
   trackById(index: number, value: Donut) {

@@ -7,7 +7,7 @@ describe('DonutSingleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DonutSingleComponent],
+      imports: [DonutSingleComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(DonutSingleComponent);

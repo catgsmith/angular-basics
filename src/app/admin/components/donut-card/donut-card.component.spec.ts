@@ -3,7 +3,6 @@ import { DonutCardComponent } from './donut-card.component';
 import { Donut } from '../../models/donut.model';
 import { By } from '@angular/platform-browser';
 
-
 describe('DonutCardComponent', () => {
   let component: DonutCardComponent;
   let fixture: ComponentFixture<DonutCardComponent>;
@@ -19,12 +18,12 @@ describe('DonutCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DonutCardComponent],
+      imports: [DonutCardComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(DonutCardComponent);
     component = fixture.componentInstance;
-    component.donut = donut;  // Set the donut input here
+    component.donut = donut; // Set the donut input here
     fixture.detectChanges();
   });
 
@@ -33,7 +32,7 @@ describe('DonutCardComponent', () => {
   });
 
   it('should have correct image src', () => {
-    component.donut.icon =  'cherry';
+    component.donut.icon = 'cherry';
     fixture.detectChanges();
 
     const imgElement = fixture.debugElement.query(By.css('.donut-card-icon')).nativeElement;
@@ -51,8 +50,8 @@ describe('DonutCardComponent', () => {
   test.each([
     ['new', 'NEW'],
     ['limited', 'LIMITED']
-  ])('should render %s when donut promo is %s', (promo:  any, expectedLabel : any) => {
-    component.donut!.promo =  promo;
+  ])('should render %s when donut promo is %s', (promo: any, expectedLabel: any) => {
+    component.donut!.promo = promo;
     fixture.detectChanges();
 
     const labelElement = fixture.debugElement.query(By.css('.donut-card-label')).nativeElement;

@@ -7,7 +7,7 @@ describe('DonutListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DonutListComponent],
+      imports: [DonutListComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(DonutListComponent);

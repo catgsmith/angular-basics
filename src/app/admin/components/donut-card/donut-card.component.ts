@@ -13,22 +13,14 @@ import { CurrencyPipe, NgClass } from '@angular/common';
       [routerLink]="donut.id"
       [ngClass]="{
         'donut-card-promo': donut.promo
-      }"
-    >
-      <img
-        src="/assets/img/{{ donut.icon }}.svg"
-        [alt]="donut.name"
-        class="donut-card-icon"
-      />
+      }">
+      <img src="/assets/img/{{ donut.icon }}.svg" [alt]="donut.name" class="donut-card-icon" />
       <div>
         <p class="donut-card-name">
           {{ donut.name }}
           @if (donut.promo) {
           <span class="donut-card-label">
-            @switch(donut.promo) { 
-              @case('new') { NEW } 
-              @case('limited') { LIMITED }
-            }
+            @switch(donut.promo) { @case('new') { NEW } @case('limited') { LIMITED } }
           </span>
           }
         </p>
@@ -74,8 +66,8 @@ import { CurrencyPipe, NgClass } from '@angular/common';
           margin-right: 10px;
         }
       }
-    `,
-  ],
+    `
+  ]
 })
 export class DonutCardComponent {
   @Input() donut!: Donut;

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-
 @Component({
   standalone: true,
   imports: [RouterModule],
@@ -16,26 +15,26 @@ import { RouterModule } from '@angular/router';
   `,
   styles: [
     `
-        .app {
-            background: #fff;
-            border-radius: 8px;
-            max-width: 400px;
-            width: 94%;
-            margin: 25px auto;
-            padding: 25px;
-            border: 4px solid #ef9fc7;
-        }
-        .header {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 25px;
-        }
-        .logo {
-            width: 100px;
-            height: 88px;
-        }
-    `,
-  ],
+      .app {
+        background: #fff;
+        border-radius: 8px;
+        max-width: 400px;
+        width: 94%;
+        margin: 25px auto;
+        padding: 25px;
+        border: 4px solid #ef9fc7;
+      }
+      .header {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 25px;
+      }
+      .logo {
+        width: 100px;
+        height: 88px;
+      }
+    `
+  ]
 })
 export class AppComponent {
   title = 'angular-basics';
