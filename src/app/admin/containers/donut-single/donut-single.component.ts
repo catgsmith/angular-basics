@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
     <div>
       <donut-form
         [donut]="donut"
+        [isEdit]="isEdit"
         (create)="onCreate($event)"
         (update)="onUpdate($event)"
         (delete)="onDelete($event)"
@@ -27,6 +28,7 @@ export class DonutSingleComponent implements OnInit {
   private toastr = inject(ToastrService);
 
   donut!: Donut;
+  isEdit!: boolean;
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -34,6 +36,8 @@ export class DonutSingleComponent implements OnInit {
     this.donutService
       .readOne(id)
       .subscribe((donut: Donut) => (this.donut = donut));
+    
+    this.isEdit = this.route.snapshot.data['isEdit'];
   }
 
   onCreate(donut: Donut) {

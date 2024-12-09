@@ -10,11 +10,13 @@ export const appRoutes: Routes = [
             },
             {
                 path: 'donuts/new',
-                loadComponent: () => import('./admin/containers/donut-single/donut-single.component').then(c => c.DonutSingleComponent)
+                loadComponent: () => import('./admin/containers/donut-single/donut-single.component').then(c => c.DonutSingleComponent),
+                data: { isEdit: false }
             },
             {
                 path: 'donuts/:id',
-                loadComponent: () => import('./admin/containers/donut-single/donut-single.component').then(c => c.DonutSingleComponent)
+                loadComponent: () => import('./admin/containers/donut-single/donut-single.component').then(c => c.DonutSingleComponent),
+                data: { isEdit: true }
             },
             { path: '', pathMatch: 'full', redirectTo: 'donuts' },
         ],

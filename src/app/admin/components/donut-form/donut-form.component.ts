@@ -70,12 +70,17 @@ import { Donut } from '../../models/donut.model';
             <div class="donut-form-error">Description is required.</div>
           }
         </label>
-
-        <button type="button" class="btn btn--green" (click)="handleCreate(form)">Create</button>
+        @if (isEdit) {
         <button type="button" class="btn btn--green" [disabled]="form.untouched && form.pristine" (click)="handleUpdate(form)">Update</button>
         <button type="button" class="btn btn--green" (click)="handleDelete()">Delete</button>
-        <button type="button" class="btn btn--grey" (click)="form.resetForm({ name: 'Initial state'})">Reset Form</button>
+        } @else {
+          <button type="button" class="btn btn--green" (click)="handleCreate(form)">Create</button>
+        }
           
+        @if (form.touched || isEdit) {
+          <button type="button" class="btn btn--grey" (click)="form.resetForm({ name: 'Initial state'})">Reset Form</button>
+        }
+
         @if (form.valid && form.submitted) {
           <div class="donut-form-working">Working...</div>
         }
@@ -119,7 +124,8 @@ import { Donut } from '../../models/donut.model';
   ],
 })
 export class DonutFormComponent {
-  @Input() donut!: Donut;
+  @Input({ required: true }) donut!: Donut;
+  @Input({ required: true }) isEdit!: boolean;
   @Output() create = new EventEmitter<Donut>();
   @Output() update = new EventEmitter<Donut>();
   @Output() delete = new EventEmitter<Donut>();
