@@ -3,7 +3,7 @@ import { DonutFormComponent } from '../../components/donut-form/donut-form.compo
 import { Donut } from '../../models/donut.model';
 import { DonutService } from '../../services/donut.service';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'donut-single',
@@ -23,7 +23,8 @@ import { ActivatedRoute } from '@angular/router';
   styles: ``,
 })
 export class DonutSingleComponent implements OnInit {
-  private route = inject(ActivatedRoute);
+  private route = inject(ActivatedRoute); // NOT req'd in imports array
+  private router = inject(Router);        // NOT req'd in imports array
   private donutService = inject(DonutService);
   private toastr = inject(ToastrService);
 
@@ -43,12 +44,19 @@ export class DonutSingleComponent implements OnInit {
   onCreate(donut: Donut) {
     this.donutService
       .create(donut)
-      .subscribe(() => console.log('Created successfully!', donut));
+      .subscribe((donut) =>
+        this.router.navigate(['admin', 'donuts', donut.id])
+      ); 
   }
 
   onUpdate(donut: Donut) {
-    this.donutService.update(donut).subscribe({
-      next: () => this.toastr.success('Donut updated successfully!'),
+    this.donutService
+    .update(donut)
+    .subscribe({
+      next: () => { 
+        this.toastr.success('Donut updated successfully!'); 
+        this.router.navigate(['admin']);
+      },
       error: (err) =>
         this.toastr.error(`Failed to update the donut: \n${err.message}`),
     });
@@ -57,6 +65,13 @@ export class DonutSingleComponent implements OnInit {
   onDelete(donut: Donut) {
     this.donutService
       .delete(donut)
-      .subscribe(() => console.log('Deleted successfully!'));
+      .subscribe({
+        next: () => { 
+          this.toastr.success('Donut deleted successfully!'); 
+          this.router.navigate(['admin']);
+        },
+        error: (err) =>
+          this.toastr.error(`Failed to delete the donut: \n${err.message}`),
+      });
   }
 }
