@@ -3,7 +3,7 @@
   "$schema": "node_modules/nx/schemas/project-schema.json",
   "includedScripts": [],
   "projectType": "application",
-  "prefix": "app",
+  "prefix": "",
   "sourceRoot": "./src",
   "tags": [],
   "targets": {
@@ -54,6 +54,9 @@
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "proxyConfig": "proxy.conf.json"
+      },
       "configurations": {
         "production": {
           "buildTarget": "angular-basics:build:production"

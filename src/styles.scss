@@ -1,5 +1,7 @@
+@import 'ngx-toastr/toastr';
+
 * {
-  font-family: "Patua One", sans-serif;
+  font-family: 'Patua One', sans-serif;
   box-sizing: border-box;
 }
 
@@ -42,7 +44,7 @@ label {
     border-color: #e3e3e3;
   }
   &--select {
-    background-image: url("/assets/img/icon/down.svg");
+    background-image: url('/assets/img/icon/down.svg');
     background-position: 98% center;
     background-repeat: no-repeat;
     appearance: none;
@@ -80,3 +82,7 @@ label {
   }
 }
 
+form .ng-invalid.ng-touched {
+  background: #ffe7e7;
+  border-color: #e66262;
+}
